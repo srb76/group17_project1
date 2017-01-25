@@ -8,33 +8,37 @@ package edu.oregonstate.cs361.battleship;
 public class ship {
     private String name;
     private int length;
-    //private point start;
-    //private point end;
+    private Point start;
+    private Point end;
 
+    // default constructor
     public ship(){
         name = null;
         length = 0;
-        //start = new point ();
-        //end = new point();
+        start = new Point ();
+        end = new Point();
     }
 
-    public ship(String name, int length){
+    // constructor with args to initialize
+    public ship(String name, int length, Point start, Point end){
         this.name = name;
         this.length = length;
-
+        this.start = new Point(start);
+        this.end = new Point(end);
     }
 
+    // copy constructor
     public ship(ship aship){
         name = aship.name;
         length = aship.length;
-        //start = new point(aship.start);
-        //end = new point(aship.end);
+        start = new Point(aship.start);
+        end = new Point(aship.end);
     }
 
     public void display (){
         System.out.println("Name: " + name);
         System.out.println("Length: " + length);
-        //start.display();
-        //end.display();
+        start.display();
+        end.display();
     }
 }

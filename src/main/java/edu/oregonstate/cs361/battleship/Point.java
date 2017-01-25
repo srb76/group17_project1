@@ -6,8 +6,7 @@ package edu.oregonstate.cs361.battleship;
 public class Point {
     private int across;
     private int down;
-
-    public Point(){
+  public Point(){
      across = 0;
      down = 0;
     }
@@ -17,6 +16,7 @@ public class Point {
     }
     public void display(){
         System.out.println("Across: "+ across);
-        System.out.println("Down "+ down);
+        System.out.println("Down: "+ down)
+
     }
 }
