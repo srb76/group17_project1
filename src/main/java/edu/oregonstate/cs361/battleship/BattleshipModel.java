@@ -23,10 +23,10 @@ public class BattleshipModel {
     private ship computer_submarine;
 
     //collection of hits and misses.
-    //ArrayList<point> playerHits;
-    //ArrayList<point> playerMisses;
-    //ArrayList<point> computerHits;
-    //ArrayList<point> computerMisses;
+    private ArrayList<Point> playerHits;
+    private ArrayList<Point> playerMisses;
+    private ArrayList<Point> computerHits;
+    private ArrayList<Point> computerMisses;
 
     public BattleshipModel (){
         aircraftCarrier = new ship();
@@ -39,24 +39,34 @@ public class BattleshipModel {
         computer_cruiser = new ship();
         computer_destroyer = new ship();
         computer_submarine = new ship();
-
+        playerHits = new ArrayList<Point>();
+        playerMisses = new ArrayList<Point>();
+        computerHits = new ArrayList<Point>();
+        computerMisses = new ArrayList<Point>();
     }
 
-    // creates a new battle ship from ships and a collections of hits
+    // creates a new battle ship from ships and a collections of hits.
+    // don't user unless you have too!
     public BattleshipModel (ship aircraftCarrier, ship battleShip, ship cruiser, ship destroyer, ship submarine,
                             ship computer_aircraftCarrier, ship computer_battleShip, ship computer_cruiser,
-                            ship computer_destroyer, ship computer_submarine) {
-            this.aircraftCarrier =  new ship(aircraftCarrier);
-            this.battleShip = new ship(battleShip);
-            this.cruiser = new ship(cruiser);
-            this.destroyer = new ship(destroyer);
-            this.submarine = new ship (submarine);
-            this.computer_aircraftCarrier = new ship(computer_aircraftCarrier);
-            this.computer_battleShip = new ship (computer_battleShip);
-            this.computer_cruiser = new ship(computer_cruiser);
-            this.computer_destroyer = new ship(computer_destroyer);
-            this.computer_submarine = new ship(computer_submarine);
+                            ship computer_destroyer, ship computer_submarine, ArrayList<Point> playerHits,
+                            ArrayList<Point> playerMisses, ArrayList<Point> computerHits,
+                            ArrayList<Point> computerMisses) {
+            this.aircraftCarrier    =  new ship(aircraftCarrier);
+            this.battleShip         = new ship(battleShip);
+            this.cruiser            = new ship(cruiser);
+            this.destroyer          = new ship(destroyer);
+            this.submarine          = new ship (submarine);
 
+            this.computer_aircraftCarrier   = new ship(computer_aircraftCarrier);
+            this.computer_battleShip        = new ship (computer_battleShip);
+            this.computer_cruiser           = new ship(computer_cruiser);
+            this.computer_destroyer         = new ship(computer_destroyer);
+            this.computer_submarine         = new ship(computer_submarine);
+            this.playerHits                 = new ArrayList<Point>(playerHits);
+            this.playerMisses               = new ArrayList<Point>(playerMisses);
+            this.computerHits               = new ArrayList<Point>(computerHits);
+            this.computerMisses             = new ArrayList<Point>(computerMisses);
     }
 
     //Copy constructor does a deep copy
@@ -72,6 +82,11 @@ public class BattleshipModel {
         computer_cruiser            = new ship(toCopy.computer_cruiser);
         computer_destroyer          = new ship(toCopy.computer_destroyer);
         computer_submarine          = new ship(toCopy.computer_submarine);
+
+        playerHits      = new ArrayList<Point>(toCopy.playerHits);
+        playerMisses    = new ArrayList<Point>(toCopy.playerMisses);
+        computerHits    = new ArrayList<Point>(toCopy.computerHits);
+        computerMisses  = new ArrayList<Point>(toCopy.computerMisses);
     }
 
     //Displays the game state to the console
@@ -90,8 +105,12 @@ public class BattleshipModel {
             computer_destroyer.display();
             computer_submarine.display();
 
-            // displays the list of hits.
 
+            // displays the list of hits.
+            System.out.println("playerHits: " + playerHits);
+            System.out.println("PlayerMisses: " + playerMisses);
+            System.out.println("Computer Hits: " + computerHits);
+            System.out.println("Computer Misses " + computerMisses);
     }
 
 }
