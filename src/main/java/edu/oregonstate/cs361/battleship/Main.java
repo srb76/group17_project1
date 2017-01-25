@@ -1,13 +1,19 @@
 package edu.oregonstate.cs361.battleship;
 
+
+
+
+import com.google.gson.Gson;
 import spark.Request;
 import static spark.Spark.get;
 import static spark.Spark.post;
 import static spark.Spark.staticFiles;
 
-public class Main {
 
+
+public class Main {
     public static void main(String[] args) {
+        test();
         //This will allow us to server the static pages such as index.html, app.js, etc.
         staticFiles.location("/public");
 
@@ -37,6 +43,15 @@ public class Main {
     //Similar to placeShip, but with firing.
     private static String fireAt(Request req) {
         return null;
+    }
+
+    public static void test(){
+        System.out.println("I AM TESTING GSON");
+        Gson gson = new Gson();
+        ship test = new ship("battleShip", 4, 1, 5);
+        BattleshipModel jsonTest = new BattleshipModel(test);
+        String json = gson.toJson(jsonTest);
+        System.out.println(json);
     }
 
 }
