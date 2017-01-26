@@ -29,16 +29,18 @@ public class BattleshipModel {
     private ArrayList<Point> computerMisses;
 
     public BattleshipModel (){
-        aircraftCarrier = new ship();
-        battleShip = new ship();
-        cruiser = new ship();
-        destroyer = new ship();
-        submarine = new ship();
-        computer_aircraftCarrier = new ship();
-        computer_battleShip = new ship();
-        computer_cruiser = new ship();
-        computer_destroyer = new ship();
-        computer_submarine = new ship();
+        Point x = new Point(0, 0);
+
+        aircraftCarrier = new ship("AircraftCarrier", 5, x, x);
+        battleShip = new ship("BattleShip", 4,x,x);
+        cruiser = new ship("Crusier", 3, x, x);
+        destroyer = new ship("Destoryer",2, x, x);
+        submarine = new ship("Submarine", 2, x, x);
+        computer_aircraftCarrier = new ship("Computer_AircraftCarrier", 5,x,x);
+        computer_battleShip = new ship("Computer_BattleShip",4,x, x);
+        computer_cruiser = new ship("Computer_Crusier", 3, x, x);
+        computer_destroyer = new ship("Computer_Destroyer", 2, x ,x);
+        computer_submarine = new ship("Computer_Submarine",2, x, x);
         playerHits = new ArrayList<Point>();
         playerMisses = new ArrayList<Point>();
         computerHits = new ArrayList<Point>();
