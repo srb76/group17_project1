@@ -1,16 +1,15 @@
 package edu.oregonstate.cs361.battleship;
 
+
 import java.util.*;
 
 
 
 
-/**
- * Created by DanielSchroederMac on 1/23/17.
- */
+
 public class BattleshipModel {
 
-    //
+    //Collection of ships that represent the game state
     private ship aircraftCarrier;
     private ship battleShip;
     private ship cruiser;

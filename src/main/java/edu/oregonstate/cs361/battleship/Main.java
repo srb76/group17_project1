@@ -27,8 +27,8 @@ public class Main {
     }
 
     //This function should return a new model
-    private static String newModel() {
-        return null;
+    static String newModel() {
+        return "MODEL";
     }
 
     //This function should accept an HTTP request and deseralize it into an actual Java object.
@@ -38,7 +38,7 @@ public class Main {
 
     //This controller should take a json object from the front end, and place the ship as requested, and then return the object.
     private static String placeShip(Request req) {
-        return null;
+        return "SHIP";
     }
 
     //Similar to placeShip, but with firing.
