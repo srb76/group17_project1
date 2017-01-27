@@ -14,9 +14,14 @@ public class Point {
         across =  toCopy.across;
         down = toCopy.down;
     }
+
+    public Point(int across, int down){
+        this.across = across;
+        this.down = down;
+    }
+
     public void display(){
         System.out.println("Across: "+ across);
-        System.out.println("Down: "+ down)
-
+        System.out.println("Down: "+ down);
     }
 }
