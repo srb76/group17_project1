@@ -33,7 +33,7 @@ public class Main {
         System.out.println(model);
         String fullModel = "model: ";
 
-        return fullModel;
+        return model;
     }
 
     //This function should accept an HTTP request and deseralize it into an actual Java object.
@@ -47,7 +47,7 @@ public class Main {
         String model = req.body();
         System.out.println("url: " + url);
         System.out.println("body: " + model);
-        return "HOLY SHIP";
+        return "This is a place holder";
     }
 
     //Similar to placeShip, but with firing.
