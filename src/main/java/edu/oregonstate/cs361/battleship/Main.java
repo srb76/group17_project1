@@ -33,7 +33,7 @@ public class Main {
         System.out.println(model);
         String fullModel = "model: ";
 
-        return "STIRNG";
+        return fullModel;
     }
 
     //This function should accept an HTTP request and deseralize it into an actual Java object.
