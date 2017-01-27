@@ -13,7 +13,7 @@ import static spark.Spark.staticFiles;
 
 public class Main {
     public static void main(String[] args) {
-        test();
+
         //This will allow us to server the static pages such as index.html, app.js, etc.
         staticFiles.location("/public");
 
@@ -26,8 +26,9 @@ public class Main {
     }
 
     //This function should return a new model
-    private static String newModel() {
-        return null;
+    static String newModel() {
+        BattleshipModel test = new BattleshipModel();
+        return "MODEL";
     }
 
     //This function should accept an HTTP request and deseralize it into an actual Java object.
@@ -37,21 +38,12 @@ public class Main {
 
     //This controller should take a json object from the front end, and place the ship as requested, and then return the object.
     private static String placeShip(Request req) {
-        return null;
+        return "SHIP";
     }
 
     //Similar to placeShip, but with firing.
     private static String fireAt(Request req) {
         return null;
-    }
-
-    public static void test(){
-        System.out.println("I AM TESTING GSON");
-        Gson gson = new Gson();
-        ship test = new ship("battleShip", 4, 1, 5);
-        BattleshipModel jsonTest = new BattleshipModel(test);
-        String json = gson.toJson(jsonTest);
-        System.out.println(json);
     }
 
 }
