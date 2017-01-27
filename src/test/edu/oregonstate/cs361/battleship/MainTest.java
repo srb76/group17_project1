@@ -44,7 +44,7 @@ class MainTest {
     public void testPlaceShip() {
         TestResponse res = request("POST", "/placeShip/aircraftCarrier/1/1/horizontal");
         assertEquals(200, res.status);
-        assertEquals("SHIP",res.body);
+        assertEquals("HOLY SHIP",res.body);
     }
 
     private TestResponse request(String method, String path) {
