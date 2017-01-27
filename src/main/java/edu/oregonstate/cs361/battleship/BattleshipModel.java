@@ -103,7 +103,7 @@ public class BattleshipModel {
             // displays the computer ships
             computer_aircraftCarrier.display();
             computer_battleShip.display();
-            computer_destroyer.display();
+            computer_cruiser.display();
             computer_destroyer.display();
             computer_submarine.display();
 

@@ -14,6 +14,7 @@ import static spark.Spark.staticFiles;
 public class Main {
     public static void main(String[] args) {
         test();
+
         //This will allow us to server the static pages such as index.html, app.js, etc.
         staticFiles.location("/public");
 
@@ -45,13 +46,11 @@ public class Main {
         return null;
     }
 
-    public static void test(){
-        System.out.println("I AM TESTING GSON");
+    private static void test(){
+        BattleshipModel test1 = new BattleshipModel();
         Gson gson = new Gson();
-        ship test = new ship("battleShip", 4, 1, 5);
-        BattleshipModel jsonTest = new BattleshipModel(test);
-        String json = gson.toJson(jsonTest);
-        System.out.println(json);
+        String toJson = gson.toJson(test1);
+        BattleshipModel test2 = gson.fromJson(toJson, BattleshipModel.class);
+        test2.display();
     }
-
 }
