@@ -11,7 +11,7 @@ public class BattleshipModel {
 
     //Collection of ships that represent the game state
     private ship aircraftCarrier;
-    private ship battleShip;
+    private ship battleship;
     private ship cruiser;
     private ship destroyer;
     private ship submarine;
@@ -31,7 +31,7 @@ public class BattleshipModel {
         Point x = new Point(0, 0);
 
         aircraftCarrier = new ship("AircraftCarrier", 5, x, x);
-        battleShip = new ship("BattleShip", 4,x,x);
+        battleship = new ship("BattleShip", 4,x,x);
         cruiser = new ship("Crusier", 3, x, x);
         destroyer = new ship("Destoryer",2, x, x);
         submarine = new ship("Submarine", 2, x, x);
@@ -54,7 +54,7 @@ public class BattleshipModel {
                             ArrayList<Point> playerMisses, ArrayList<Point> computerHits,
                             ArrayList<Point> computerMisses) {
             this.aircraftCarrier    =  new ship(aircraftCarrier);
-            this.battleShip         = new ship(battleShip);
+            this.battleship         = new ship(battleShip);
             this.cruiser            = new ship(cruiser);
             this.destroyer          = new ship(destroyer);
             this.submarine          = new ship (submarine);
@@ -73,7 +73,7 @@ public class BattleshipModel {
     //Copy constructor does a deep copy
     public BattleshipModel(BattleshipModel toCopy){
         aircraftCarrier = toCopy.aircraftCarrier;
-        battleShip      = new ship(toCopy.battleShip);
+        battleship      = new ship(toCopy.battleship);
         cruiser         = new ship (toCopy.cruiser);
         destroyer       = new ship(toCopy.destroyer);
         submarine       = new ship(toCopy.submarine);
@@ -94,7 +94,7 @@ public class BattleshipModel {
     public void display(){
             //displays the user ships
             aircraftCarrier.display();
-            battleShip.display();
+            battleship.display();
             cruiser.display();
             destroyer.display();
             submarine.display();
@@ -112,6 +112,14 @@ public class BattleshipModel {
             System.out.println("PlayerMisses: " + playerMisses);
             System.out.println("Computer Hits: " + computerHits);
             System.out.println("Computer Misses " + computerMisses);
+    }
+
+    // This function will place the ship on the game board where it needs to go
+    // and do some error checking to make sure that the request follows
+    // the rules of the game
+    public String placeShip(String id, String col, String row, String orientation) {
+        int across;
+        return null;
     }
 
 }
