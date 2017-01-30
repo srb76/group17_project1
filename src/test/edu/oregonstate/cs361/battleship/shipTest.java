@@ -17,29 +17,58 @@ class shipTest {
         test = new ship();
         overlap = new ship();
         boolean result = test.shipOverlap(overlap);
-        assertEquals(result, false);
+        assertEquals(result, true);
     }
 
     // test for the case that ships partially overlap
-    @Test
-    void shipsPartialyOverlap(){
+   @Test
+    void shipsPartiallyOverlap(){
+        // Sets up two ships that overlap paritally
+        Point start = new Point(1,1);
+        Point end = new Point(1, 5);
+        test = new ship("battleShip", 4, start, end);
+        start.setPoint(3,1);
+        end.setPoint(8, 1);
+        overlap = new ship("aircraftCairrier", 5, start, end);
 
+        boolean result = test.shipOverlap(overlap);
+        assertEquals(result, true);
     }
 
     //tests for the case that ships are parallel
     @Test
     void shipsParallel() {
+        // creates parallel ships and tests if they intersect
+        Point start = new Point(1, 1);
+        Point end = new Point(1, 3);
+        test = new ship("battleShip", 4, start, end);
+        start.setPoint(2,1);
+        end.setPoint(2, 3);
+        overlap = new ship("submarine", 2, start, end);
 
+        boolean result = test.shipOverlap(overlap);
+        assertEquals(result, false);
     }
 
     //tests for the case that ships intersect
     @Test
     void shipsIntersect() {
+        Point start = new Point(1,1);
+        Point end = new Point(1, 5);
+        test = new ship("battleShip", 4, start, end);
+        start.setPoint(1, 3);
+        end.setPoint(6, 3);
+        overlap = new ship("aircraftcairer", 5, start, end);
+
+        boolean result = test.shipOverlap(overlap);
+
+        assertEquals(result, true);
 
     }
 
     @Test
     void shipsPerpendicularButDontIntersect(){
+
 
     }
 }

@@ -35,7 +35,7 @@ public class Point {
         return Down;
     }
 
-    public void setPoint(int down, int across){
+    public void setPoint(int across, int down){
         Down = down;
         Across = across;
     }
