@@ -46,8 +46,15 @@ public class ship {
     // weather or not the points give intersect with the points
     // already in the ship.
     public boolean shipOverlap(ship check){
-        if(start.equals(check.start) || start.equals(check.end) || end.equals(check.end) || end.equals(check.start)){
+        if(start.equals(check.start) || start.equals(check.end)){
             return true;
+        }
+        int thisADistance = start.acrossLength(end);
+        int thisDDistance = start.
+        Point thisObject = new Point(start);
+        Point checkObject = new Point(start);
+        for(int i = 0; i < length; ++i){
+
         }
         return false;
     }
