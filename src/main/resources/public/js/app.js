@@ -2,10 +2,10 @@ var gameModel;
 
 //This function will be called once the page is loaded.  It will get a new game model from the back end, and display it.
 $( document ).ready(function() {
-
-  $.getJSON("model", function( json ) {
-    displayGameState(currModel);
+    console.log("DO SOME STUFF");
+    $.getJSON("model", function (json) {
     gameModel = json;
+    displayGameState(gameModel);
    });
 });
 
