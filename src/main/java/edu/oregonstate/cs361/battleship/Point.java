@@ -39,4 +39,11 @@ public class Point {
         Down = down;
         Across = across;
     }
+
+    public boolean equals(Point p) {
+        if (Across == p.Across) {
+            return true;
+        }
+        return false;
+    }
 }

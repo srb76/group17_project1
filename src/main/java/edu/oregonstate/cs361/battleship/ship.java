@@ -41,4 +41,14 @@ public class ship {
         start.display();
         end.display();
     }
+
+    //this function takes two points as paramaters and checks
+    // weather or not the points give intersect with the points
+    // already in the ship.
+    public boolean shipOverlap(ship check){
+        if(start.equals(check.start) || start.equals(check.end) || end.equals(check.end) || end.equals(check.start)){
+            return true;
+        }
+        return false;
+    }
 }
