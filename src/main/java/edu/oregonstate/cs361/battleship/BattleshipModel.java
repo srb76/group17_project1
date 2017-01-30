@@ -91,6 +91,7 @@ public class BattleshipModel {
     }
 
     //Displays the game state to the console
+    /* FOR TESTING ONLY
     public void display(){
             //displays the user ships
             aircraftCarrier.display();
@@ -113,7 +114,7 @@ public class BattleshipModel {
             System.out.println("Computer Hits: " + computerHits);
             System.out.println("Computer Misses " + computerMisses);
     }
-
+*/
     // This function will place the ship on the game board where it needs to go
     // and do some error checking to make sure that the request follows
     // the rules of the game
