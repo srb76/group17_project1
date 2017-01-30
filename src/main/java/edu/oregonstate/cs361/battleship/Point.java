@@ -26,4 +26,17 @@ public class Point {
         System.out.println("Across: "+ Across);
         System.out.println("Down: "+ Down);
     }
+
+    public int getAcross(){
+        return Across;
+    }
+
+    public int getDown(){
+        return Down;
+    }
+
+    public void setPoint(int down, int across){
+        Down = down;
+        Across = across;
+    }
 }

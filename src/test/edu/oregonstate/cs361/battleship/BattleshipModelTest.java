@@ -13,10 +13,10 @@ class BattleshipModelTest {
 
 
     @Test
-    void placeShip() {
+    void placeShipAircraftCarrier() {
         BattleshipModel test = new BattleshipModel();
         String result = test.placeShip("aircraftCarrier", "1", "1", "vertical" );
-        assertEquals(result, null);
+        assertEquals(result, "Sucess: placed aircraftCarrier at 1, 1");
     }
 
 }

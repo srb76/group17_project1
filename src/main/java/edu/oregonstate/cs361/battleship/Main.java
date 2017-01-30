@@ -30,7 +30,7 @@ public class Main {
         BattleshipModel test = new BattleshipModel();
         Gson gson = new Gson();
         String model = new String(gson.toJson(test));
-        System.out.println(model);
+        //System.out.println(model);
         String fullModel = "model: ";
 
         return model;
@@ -58,12 +58,12 @@ public class Main {
         col = req.params("col");
         orientation = req.params("orientation");
 
+
         // do some stuff here to modify the game state.
 
         //turs newModel back into a json string
         Gson gson = new Gson();
         String model = gson.toJson(newModel);
-        System.out.println(model);
         return model;
     }
 
