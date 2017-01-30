@@ -41,9 +41,30 @@ public class Point {
     }
 
     public boolean equals(Point p) {
-        if (Across == p.Across) {
+        if (Across == p.Across && Down == p.Down) {
             return true;
         }
         return false;
     }
+
+    public int acrossLength(Point p){
+        int length;
+        if(p.Across >= Across){
+            length = p.Across - Across;
+        } else{
+            length = Across - p.Across;
+        }
+        return length;
+    }
+
+    public int downLength(Point p){
+        int length;
+        if(p.Down >= Down ){
+            length = p.Down - Down;
+        } else {
+            length = Down - p.Down;
+        }
+        return length;
+    }
+
 }

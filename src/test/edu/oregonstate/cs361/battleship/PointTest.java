@@ -57,5 +57,37 @@ class PointTest {
         assertEquals(result, false);
     }
 
+    @Test
+    void distanceAcross(){
+        test = new Point(1, 3);
+        p = new Point (3, 1);
+        int result = test.acrossLength(p);
+        assertEquals(result, 2);
+    }
 
+    @Test
+    void distanceDown(){
+        test = new Point(1 , 1);
+        p = new Point(1, 3);
+        int result = test.downLength(p);
+
+        assertEquals(result, 2);
+    }
+
+    @Test
+    void distanceAcrossInverted(){
+        test = new Point(3, 3);
+        p = new Point (1, 3);
+        int result = test.acrossLength(p);
+        assertEquals(result, 2);
+    }
+
+    @Test
+    void distanceDownInverted(){
+        test = new Point(1 , 3);
+        p = new Point(1, 1);
+        int result = test.downLength(p);
+
+        assertEquals(result, 2);
+    }
 }

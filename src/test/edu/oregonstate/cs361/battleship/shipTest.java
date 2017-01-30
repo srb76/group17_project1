@@ -68,7 +68,16 @@ class shipTest {
 
     @Test
     void shipsPerpendicularButDontIntersect(){
+        Point start = new Point(1,1);
+        Point end = new Point(1, 5);
+        test = new ship("battleShip", 4, start, end);
+        start.setPoint(3, 3);
+        end.setPoint(8, 3);
+        overlap = new ship("aircraftcairer", 5, start, end);
 
+        boolean result = test.shipOverlap(overlap);
+
+        assertEquals(result, false);
 
     }
 }
