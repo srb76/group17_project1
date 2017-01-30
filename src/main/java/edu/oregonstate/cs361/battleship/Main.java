@@ -28,17 +28,43 @@ public class Main {
     //This function should return a new model
     static String newModel() {
         BattleshipModel test = new BattleshipModel();
-        return "MODEL";
+        Gson gson = new Gson();
+        String model = new String(gson.toJson(test));
+        //System.out.println(model);
+        String fullModel = "model: ";
+
+        return model;
     }
 
     //This function should accept an HTTP request and deseralize it into an actual Java object.
     private static BattleshipModel getModelFromReq(Request req){
-        return null;
+        String model = req.body();
+        Gson gson = new Gson();
+        BattleshipModel newModel = gson.fromJson(model, BattleshipModel.class);
+        return newModel;
     }
 
     //This controller should take a json object from the front end, and place the ship as requested, and then return the object.
     private static String placeShip(Request req) {
-        return "SHIP";
+        //gets the model from the body and turns it in to a java object
+        BattleshipModel newModel = getModelFromReq(req);
+        //gets the params from the request
+        String id;
+        String row;
+        String col;
+        String orientation;
+        id = req.params("id");
+        row = req.params("row");
+        col = req.params("col");
+        orientation = req.params("orientation");
+
+
+        // do some stuff here to modify the game state.
+
+        //turs newModel back into a json string
+        Gson gson = new Gson();
+        String model = gson.toJson(newModel);
+        return model;
     }
 
     //Similar to placeShip, but with firing.

@@ -4,24 +4,39 @@ package edu.oregonstate.cs361.battleship;
  * Created by Garrett on 1/25/2017.
  */
 public class Point {
-    private int across;
-    private int down;
+
+    private int Across;
+    private int Down;
+
   public Point(){
-     across = 0;
-     down = 0;
+     Across = 0;
+     Down = 0;
     }
     public Point(Point toCopy){
-        across =  toCopy.across;
-        down = toCopy.down;
+        Across =  toCopy.Across;
+        Down = toCopy.Down;
     }
 
     public Point(int across, int down){
-        this.across = across;
-        this.down = down;
+        this.Across = across;
+        this.Down = down;
     }
 
     public void display(){
-        System.out.println("Across: "+ across);
-        System.out.println("Down: "+ down);
+        System.out.println("Across: "+ Across);
+        System.out.println("Down: "+ Down);
+    }
+
+    public int getAcross(){
+        return Across;
+    }
+
+    public int getDown(){
+        return Down;
+    }
+
+    public void setPoint(int down, int across){
+        Down = down;
+        Across = across;
     }
 }
