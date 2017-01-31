@@ -43,6 +43,13 @@ public class ship {
         end.display();
     }
 */
+
+    //checks if the name is the same as toCheck
+    // returns false if no and true if yes.
+    public boolean checkName(String toCheck){
+        String tempName = name.toLowerCase();
+        return tempName.equals(toCheck.toLowerCase());
+    }
     //this function takes two points as paramaters and checks
     // weather or not the points give intersect with the points
     // already in the ship.

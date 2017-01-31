@@ -121,4 +121,13 @@ class shipTest {
         assertEquals(expected, result);
     }
 
+    @Test
+    void testCheckName(){
+        Point x = new Point(0,0);
+        test = new ship("battleship", 4, x,x);
+        boolean equal = test.checkName("battleship");
+        boolean notEqual = test.checkName("stuff");
+        assertEquals(true, equal);
+        assertEquals(false, notEqual);
+    }
 }
