@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.google.gson.*;
+
 /**
  * Created by tnoelcke on 1/30/2017.
  */
@@ -82,7 +84,41 @@ class shipTest {
     }
 
     @Test
-    void downTest(){
+    void testCopyConstructor(){
+        Gson gson = new Gson();
+        Point x = new Point(0,0);
+        test = new ship("BattleShip", 4, x, x);
+        overlap = new ship(test);
+        String expected = gson.toJson(test);
+        String result = gson.toJson(overlap);
+        assertEquals(expected, result);
 
     }
+
+    @Test
+    void testSetStart(){
+        Gson gson = new Gson();
+        Point x = new Point(2, 2);
+        Point zero = new Point (0, 0);
+        test = new ship("Stuff", 4, x, zero);
+        overlap = new ship("Stuff", 4, zero, zero);
+        overlap.setStart(2, 2);
+        String expected = gson.toJson(test);
+        String result = gson.toJson(overlap);
+        assertEquals(expected, result);
+    }
+
+    @Test
+    void testSetEnd(){
+        Gson gson = new Gson();
+        Point x = new Point(2, 2);
+        Point zero = new Point (0, 0);
+        test = new ship("Stuff", 4, zero, x);
+        overlap = new ship("Stuff", 4, zero, zero);
+        overlap.setEnd(2, 2);
+        String expected = gson.toJson(test);
+        String result = gson.toJson(overlap);
+        assertEquals(expected, result);
+    }
+
 }

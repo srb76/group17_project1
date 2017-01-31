@@ -84,4 +84,12 @@ public class ship {
         }
         return false;
     }
+
+    public void setStart(int across, int down) {
+        start.setPoint(across, down);
+    }
+
+    public void setEnd(int across, int down) {
+        end.setPoint(across, down);
+    }
 }

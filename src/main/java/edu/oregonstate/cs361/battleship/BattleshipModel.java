@@ -119,7 +119,9 @@ public class BattleshipModel {
     // and do some error checking to make sure that the request follows
     // the rules of the game
     public String placeShip(String id, String col, String row, String orientation) {
+
         if(id == "aircraftCarrier"){
+            
             return "Sucess: placed aircraftCarrier at " + col + ", " + row;
         }
         return null;

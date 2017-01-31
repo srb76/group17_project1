@@ -21,12 +21,13 @@ public class Point {
         this.Across = across;
         this.Down = down;
     }
-
+/*
+    for testing only!
     public void display(){
         System.out.println("Across: "+ Across);
         System.out.println("Down: "+ Down);
     }
-
+*/
     public int getAcross(){
         return Across;
     }
