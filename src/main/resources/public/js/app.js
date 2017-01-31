@@ -25,8 +25,9 @@ function placeShip() {
    });
 
    // if there is a problem, and the back end does not respond, then an alert will be shown.
-   request.fail(function( jqXHR, textStatus ) {
-     alert( "Request failed: " + textStatus );
+   request.fail(function( jqXHR, textStatus) {
+     var responseText = jqXHR.responseText;
+     alert("Request failed: " + textStatus + "\nReason: " + responseText );
    });
 }
 
@@ -46,8 +47,9 @@ function fire(){
 
    });
 
-   request.fail(function( jqXHR, textStatus ) {
-     alert( "Request failed: " + textStatus );
+   request.fail(function( jqXHR, textStatus) {
+     var responseText = jqXHR.responseText;
+     alert( "Request failed: " + textStatus + "\nReason: " + responseText);
    });
 
 }
