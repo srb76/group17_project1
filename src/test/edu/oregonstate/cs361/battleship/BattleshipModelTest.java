@@ -78,13 +78,30 @@ class BattleshipModelTest {
 
     //tests a shot at 1,1 with no ships present there, should return true to indicate this is a new firing location
     @Test
-    void testFireAt () {
+    void testHasFired () {
         BattleshipModel test = new BattleshipModel();
         boolean newHit = test.hasFired(1,1);
         assertEquals(true, newHit);
     }
 
+    //tests PlayerHitsAndMisses for a missed shot
+    @Test
+    void testMiss () {
+        String result = "";
+        BattleshipModel test = new BattleshipModel();
+        Point testShot = new Point(1,1);
+        result = test.PlayerHitsAndMisses(testShot); //Should miss
+        assertEquals("Miss!",result);
     }
 
+    //tests PlayerHitsAndMisses for a hit shot (on default location of ships)
+    @Test
+    void testHit () {
+        String result = "";
+        BattleshipModel test = new BattleshipModel();
+        Point testShot = new Point(0,0);
+        result = test.PlayerHitsAndMisses(testShot);
+        assertEquals("Hit!",result);
+    }
 
 }

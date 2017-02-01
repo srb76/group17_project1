@@ -61,7 +61,7 @@ class MainTest {
         //Location is off board and should return error
         TestResponse res = request( "POST", "/fire/0/3");
         assertEquals( 200, res.status);
-        assertEquals( "ERROR: out of bounds", res.body);
+        assertEquals( "Invalid fire location! That shot was off the board.", res.body);
     }
 
     @Test
@@ -70,7 +70,7 @@ class MainTest {
         //Location is off board and should return error
         TestResponse res = request( "POST", "/fire/4/0");
         assertEquals( 200, res.status);
-        assertEquals( "ERROR: out of bounds", res.body);
+        assertEquals( "Invalid fire location! That shot was off the board.", res.body);
     }
 
     private TestResponse request(String method, String path) {

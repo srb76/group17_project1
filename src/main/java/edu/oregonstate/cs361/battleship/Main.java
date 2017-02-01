@@ -97,6 +97,7 @@ public class Main {
         boolean noError = true;
         BattleshipModel gameState;
         Gson gson = new Gson();
+        Point fireLocation = new Point();
 
         //Convert row and col strings to integer
         int numRow = Integer.parseInt(row);
@@ -106,17 +107,34 @@ public class Main {
         gameState = getModelFromReq(req);
 
         //Test for shot in bounds
-        noError = gameState.shotInBounds(numRow,numCol);
+        noError = gameState.shotInBounds(numRow, numCol);
 
         //Test if shot has already been attempted
-        noError = gameState.hasFired(numRow,numCol);
+        if (noError)
+            noError = gameState.hasFired(numRow, numCol);
+        else {
+            //Alter error message for out of bounds shot
+            result = "Invalid fire location! That shot was off the board.";
+        }
 
         //Check if fire location is a hit or miss and update gamestate accordingly
-        //gameState.hitShip(numRow,numCol);
+        fireLocation.setPoint(numRow, numCol);
+        if (noError) {
+            //Fire at location and update computer hits and misses
+            gameState.PlayerHitsAndMisses(fireLocation);
 
-        //Convert game state back to JSON
-        result = gson.toJson(gameState);
+            //Have AI fire here?
 
+            //Convert game state back to JSON
+            result = gson.toJson(gameState);
+        }
+        else if (!result.contains("Invalid"))
+        {
+            //Alter error message for a shot that has already been attempted
+            result = "Invalid fire location! You have already fired at that location!";
+        }
+
+        //JSON string is returned if no errors were detected, otherwise a string containing the error message is returned
         return result;
     }
 

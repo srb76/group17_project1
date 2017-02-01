@@ -295,6 +295,24 @@ public class BattleshipModel {
         }
 
 }
+
+    //The player equivalent of AIHitsAndMisses
+    public String PlayerHitsAndMisses(Point point){
+        String result;
+
+        if(aircraftCarrier.AIShipHitCheck(point,aircraftCarrier) == true || battleship.AIShipHitCheck(point,battleship) == true ||
+                cruiser.AIShipHitCheck(point,cruiser) == true || destroyer.AIShipHitCheck(point,destroyer) == true ||
+                submarine.AIShipHitCheck(point,submarine) == true){
+            computerHits.add(point);
+            result = "Hit!";
+        }
+        else{
+            computerMisses.add(point);
+            result = "Miss!";
+        }
+        return result;
+
+    }
     private void fire() {
         //  userFire();  ->NEEDS IMPLEMENTATION
         Point point = AIfirePoint();
