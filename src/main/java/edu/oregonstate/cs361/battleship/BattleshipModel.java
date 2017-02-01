@@ -23,6 +23,7 @@ public class BattleshipModel {
     private ship computer_submarine;
 
     private ArrayList<Point> AI_Points;
+    private ArrayList<Point> HUMAN_Points;
 
     //collection of hits and misses.
     private ArrayList<Point> playerHits;
@@ -30,13 +31,10 @@ public class BattleshipModel {
     private ArrayList<Point> computerHits;
     private ArrayList<Point> computerMisses;
 
-    //this will tell us if its a brand new game
-    private boolean init;
 
 
     public BattleshipModel() {
         Point x = new Point(0, 0);
-        init = true;
         aircraftCarrier = new ship("AircraftCarrier", 5, x, x);
         battleship = new ship("Battleship", 4, x, x);
         cruiser = new ship("Cruiser", 3, x, x);
@@ -51,6 +49,8 @@ public class BattleshipModel {
         playerMisses = new ArrayList<Point>();
         computerHits = new ArrayList<Point>();
         computerMisses = new ArrayList<Point>();
+        HUMAN_Points = new ArrayList<Point>();
+
     }
 /*
     DIDN't NEED and don't want to test
@@ -194,6 +194,8 @@ public class BattleshipModel {
         }
         toAdd.setStart(across, down);
         toAdd.setEnd(endAcross, endDown);
+
+
         return "Success: Placed " + id + " at " + across + ", " + down;
     }
 
@@ -234,7 +236,7 @@ public class BattleshipModel {
                 int tempDown = (int) (Math.random() * 10 + 1);
 
                 //checks if these are valid coordinates
-                if (isValidComputerMove(currentShip.getLength(), orientation, tempAcross, tempDown)){
+                if (isValidComputerMove(currentShip.getLength(), orientation, tempAcross, tempDown, false )){
                     test=true;
 
                     //add points to array list of compputer points
@@ -243,11 +245,13 @@ public class BattleshipModel {
                         //adds points moving horizontally away from start
                         if(orientation == "horizontal") {
                             Point temp = new Point(tempAcross+i, tempDown);
+                            System.out.println("Adding Point: (" + temp.getAcross() +", " + temp.getDown() + ")");
                             AI_Points.add(temp);
                         }
                         //adds points moving vertically away from start
                         else{
                             Point temp = new Point(tempAcross, tempDown+i);
+                            System.out.println("Adding Point: (" + temp.getAcross() +", " + temp.getDown() + ")");
                             AI_Points.add(temp);
                         }
 
@@ -269,7 +273,14 @@ public class BattleshipModel {
 
     }
 
-    private boolean isValidComputerMove(int length, String orientation, int across, int down){
+    private boolean isValidComputerMove(int length, String orientation, int across, int down, boolean isHuman){
+
+        ArrayList<Point> temp_Points = new ArrayList<Point>();
+        ArrayList<Point> myPoints = null;
+        if(isHuman)
+            myPoints = HUMAN_Points;
+        else
+            myPoints = AI_Points;
 
         //first check to see if it runs off the page
         if(orientation == "horizontal"){
@@ -281,7 +292,7 @@ public class BattleshipModel {
                 return false;
         }
 
-        ArrayList<Point> temp_Points = new ArrayList<Point>();
+
 
         //add points to temp array list of current points
         for(int i = 0; i < length; i++){
@@ -293,7 +304,6 @@ public class BattleshipModel {
                 Point temp = new Point(across, down+i);
                 temp_Points.add(temp);
             }
-
         }
 
 
@@ -302,12 +312,12 @@ public class BattleshipModel {
             Point checkPoint = temp_Points.get(i);
 
             int counter = 0;
-            while(counter < AI_Points.size()-1){
+            while(counter < myPoints.size()){
 
                 System.out.println("Comparing myPoint(" + checkPoint.getAcross()+ ", " + checkPoint.getDown() +") " +
-                        "and AI POINT (" + AI_Points.get(counter).getAcross() + ", " + AI_Points.get(counter).getDown()+ ")");
+                        "and AI POINT (" + myPoints.get(counter).getAcross() + ", " + myPoints.get(counter).getDown()+ ")");
 
-                if((checkPoint.getAcross() == (AI_Points.get(counter).getAcross())) && (checkPoint.getDown() == (AI_Points.get(counter).getDown()))){
+                if((checkPoint.getAcross() == (myPoints.get(counter).getAcross())) && (checkPoint.getDown() == (myPoints.get(counter).getDown()))){
                     System.out.println("Overlapping points");
                     return false;
                 }
