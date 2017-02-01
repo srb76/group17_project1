@@ -18,6 +18,9 @@ import static spark.Spark.staticFiles;
 public class Main {
     public static void main(String[] args) {
 
+        BattleshipModel init = new BattleshipModel();
+        init.placeComputerShips();
+
         //This will allow us to server the static pages such as index.html, app.js, etc.
         staticFiles.location("/public");
 
@@ -28,6 +31,7 @@ public class Main {
         //This will listen to POST requests and expects to receive a game model, as well as location to place the ship
         post("/placeShip/:id/:row/:col/:orientation", (req, res) -> placeShip(res, req));
     }
+
 
     //This function should return a new model
     static String newModel() {
@@ -64,6 +68,7 @@ public class Main {
         int across = Integer.parseInt(row);
         int down = Integer.parseInt(col);
 
+
         //Attepts to place the ship and checks the result
         String result = newModel.placeShip(id, across, down, orientation);
 
@@ -81,6 +86,8 @@ public class Main {
         res.status(200);
         return model;
     }
+
+
 
     //Similar to placeShip, but with firing.
     private static String fireAt(Request req) {
