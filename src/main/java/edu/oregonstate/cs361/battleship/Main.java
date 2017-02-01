@@ -5,9 +5,13 @@ package edu.oregonstate.cs361.battleship;
 
 import com.google.gson.Gson;
 import spark.Request;
+import spark.Response;
+
+
 import static spark.Spark.get;
 import static spark.Spark.post;
 import static spark.Spark.staticFiles;
+
 
 
 
@@ -22,7 +26,7 @@ public class Main {
         //This will listen to POST requests and expects to receive a game model, as well as location to fire to
         post("/fire/:row/:col", (req, res) -> fireAt(req));
         //This will listen to POST requests and expects to receive a game model, as well as location to place the ship
-        post("/placeShip/:id/:row/:col/:orientation", (req, res) -> placeShip(req));
+        post("/placeShip/:id/:row/:col/:orientation", (req, res) -> placeShip(res, req));
     }
 
     //This function should return a new model
@@ -30,7 +34,7 @@ public class Main {
         BattleshipModel test = new BattleshipModel();
         Gson gson = new Gson();
         String model = new String(gson.toJson(test));
-        System.out.println(model);
+        //System.out.println(model);
         String fullModel = "model: ";
 
         return model;
@@ -45,12 +49,37 @@ public class Main {
     }
 
     //This controller should take a json object from the front end, and place the ship as requested, and then return the object.
-    private static String placeShip(Request req) {
-        String url = req.url();
-        String model = req.body();
-        System.out.println("url: " + url);
-        System.out.println("body: " + model);
-        return "This is a place holder";
+    private static String placeShip(Response res, Request req) {
+        //gets the model from the body and turns it in to a java object
+        BattleshipModel newModel = getModelFromReq(req);
+        //gets the params from the request
+        String id;
+        String row;
+        String col;
+        String orientation;
+        id = req.params("id");
+        row = req.params("row");
+        col = req.params("col");
+        orientation = req.params("orientation");
+        int across = Integer.parseInt(row);
+        int down = Integer.parseInt(col);
+
+        //Attepts to place the ship and checks the result
+        String result = newModel.placeShip(id, across, down, orientation);
+
+        //if placement failed
+        if(!result.contains("Success:")){
+            res.status(400);
+            return result;
+        }
+
+
+
+        //turs newModel back into a json string
+        Gson gson = new Gson();
+        String model = gson.toJson(newModel);
+        res.status(200);
+        return model;
     }
 
     //Similar to placeShip, but with firing.
