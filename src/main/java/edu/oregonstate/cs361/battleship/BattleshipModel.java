@@ -156,4 +156,9 @@ public class BattleshipModel {
         return newFire;
     }
 
+    public void hitShip(int x, int y) {
+        //Checks to see if a shot location hits any ships
+        //and adds to playerHits or playerMisses accordingly
+    }
+
 }

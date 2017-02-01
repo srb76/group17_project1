@@ -60,6 +60,7 @@ public class Main {
         String result = "";
         boolean noError = true;
         BattleshipModel gameState;
+        Gson gson = new Gson();
 
         //Convert row and col strings to integer
         int numRow = Integer.parseInt(row);
@@ -72,9 +73,17 @@ public class Main {
         noError = gameState.shotInBounds(numRow,numCol);
 
         //Test if shot has already been attempted
-        noError = gameState.hasFired(numRow,numCol);
+        //noError = gameState.hasFired(numRow,numCol);
 
-        //Set result
+        //Check if fire location is a hit or miss and update gamestate accordingly
+        //gameState.hitShip(numRow,numCol);
+
+        //Convert game state back to JSON
+        /*
+        result = gson.toJson(gameState);
+         */
+
+        //Set result (for testing purposes)
         if (noError)
             result += "FIRE: " + row + "," + col;
         else
