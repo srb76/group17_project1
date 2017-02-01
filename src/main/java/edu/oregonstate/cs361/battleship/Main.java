@@ -18,6 +18,9 @@ import static spark.Spark.staticFiles;
 public class Main {
     public static void main(String[] args) {
 
+        BattleshipModel init = new BattleshipModel();
+        init.placeComputerShips();
+
         //This will allow us to server the static pages such as index.html, app.js, etc.
         staticFiles.location("/public");
 
@@ -65,7 +68,7 @@ public class Main {
         int across = Integer.parseInt(row);
         int down = Integer.parseInt(col);
 
-        newModel.placeComputerShips();
+
         //Attepts to place the ship and checks the result
         String result = newModel.placeShip(id, across, down, orientation);
 

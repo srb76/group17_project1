@@ -1,6 +1,7 @@
 package edu.oregonstate.cs361.battleship;
 
 
+import java.applet.Applet;
 import java.util.*;
 
 
@@ -20,6 +21,8 @@ public class BattleshipModel {
     private ship computer_cruiser;
     private ship computer_destroyer;
     private ship computer_submarine;
+
+    private ArrayList<Point> AI_Points;
 
     //collection of hits and misses.
     private ArrayList<Point> playerHits;
@@ -194,29 +197,54 @@ public class BattleshipModel {
 
     public void placeComputerShips(){
         ship[] computerShips = {computer_aircraftCarrier,computer_battleShip,computer_cruiser,computer_destroyer,computer_submarine};
+        AI_Points = new ArrayList<Point>();
         int counter = 0;
         while(counter < computerShips.length){
 
             ship currentShip = computerShips[counter];
 
-            //get a random orientation
-            int randomOrientation = (int)(Math.random()*2);
-            String orientation = "";
-            if(randomOrientation == 0)
-                orientation = "horizontal";
-            else
-                orientation = "vertical";
+            boolean test = false;
+
+            while(!test) {
+
+                //get a random orientation
+                int randomOrientation = (int) (Math.random() * 2);
+                String orientation = "";
+                if (randomOrientation == 0)
+                    orientation = "horizontal";
+                else
+                    orientation = "vertical";
 
 
-            int tempAcross = (int)(Math.random()*10 +1);
-            int tempDown = (int)(Math.random()*10 +1);
-            System.out.println("orientation:" + orientation);
-            System.out.println("Across:" + tempAcross);
-            System.out.println("Down:" + tempDown);
-            System.out.println(currentShip.getName());
-            System.out.println("Length: " + currentShip.getLength());
+                int tempAcross = (int) (Math.random() * 10 + 1);
+                int tempDown = (int) (Math.random() * 10 + 1);
 
 
+                if (isValidMove(currentShip.getLength(), orientation, tempAcross, tempDown)){
+                    test=true;
+
+                    //add points to computer points array
+                    for(int i = 0; i < currentShip.getLength(); i++){
+                        if(orientation == "horizontal") {
+                            Point temp = new Point(tempAcross+i, tempDown);
+                            AI_Points.add(temp);
+                        }
+                        else{
+                            Point temp = new Point(tempAcross, tempDown+i);
+                            AI_Points.add(temp);
+                        }
+
+                    }
+
+                    System.out.println("orientation:" + orientation);
+                    System.out.println("Across:" + tempAcross);
+                    System.out.println("Down:" + tempDown);
+                    System.out.println(currentShip.getName());
+                    System.out.println("Length: " + currentShip.getLength());
+                    System.out.println(AI_Points.toString());
+                }
+
+            }
 
             counter++;
 
@@ -224,8 +252,48 @@ public class BattleshipModel {
 
     }
     private boolean isValidMove(int length, String orientation, int across, int down){
-        if(across + length)
+        if(orientation == "horizontal"){
+            if((across + length) > 10)
+                return false;
+        }
+        else {
+            if ((down + length) > 10)
+                return false;
+        }
 
-        return false;
+        ArrayList<Point> temp_Points = new ArrayList<Point>();
+
+        //add points to computer points array
+        for(int i = 0; i < length; i++){
+            if(orientation == "horizontal") {
+                Point temp = new Point(across+i, down);
+                temp_Points.add(temp);
+            }
+            else{
+                Point temp = new Point(across, down+i);
+                temp_Points.add(temp);
+            }
+
+        }
+
+        for(int i = 0; i < temp_Points.size(); i++){
+            Point checkPoint = temp_Points.get(i);
+
+            int counter = 0;
+            while(counter < AI_Points.size()-1){
+
+                System.out.println("Comparing myPoint(" + checkPoint.getAcross()+ ", " + checkPoint.getDown() +") " +
+                        "and AI POINT (" + AI_Points.get(counter).getAcross() + ", " + AI_Points.get(counter).getDown()+ ")");
+
+                if((checkPoint.getAcross() == (AI_Points.get(counter).getAcross())) && (checkPoint.getDown() == (AI_Points.get(counter).getDown()))){
+                    System.out.println("Overlapping points");
+                    return false;
+                }
+                counter++;
+            }
+
+        }
+
+        return true;
     }
 }
