@@ -108,15 +108,7 @@ public class Main {
         //gameState.hitShip(numRow,numCol);
 
         //Convert game state back to JSON
-        /*
         result = gson.toJson(gameState);
-         */
-
-        //Set result (for testing purposes)
-        if (noError)
-            result += "FIRE: " + row + "," + col;
-        else
-            result += "ERROR: out of bounds";
 
         return result;
     }

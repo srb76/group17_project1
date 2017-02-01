@@ -76,11 +76,14 @@ class BattleshipModelTest {
         assertEquals(result, horizontal);
     }
 
+    //tests a shot at 1,1 with no ships present there, should return true to indicate this is a new firing location
     @Test
     void testFireAt () {
         BattleshipModel test = new BattleshipModel();
         boolean newHit = test.hasFired(1,1);
-        assertEquals(false, newHit);
+        assertEquals(true, newHit);
+    }
+
     }
 
 
