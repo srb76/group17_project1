@@ -209,11 +209,11 @@ public class BattleshipModel {
             int down = rand.nextInt(9)+1;
             Point point = new Point(across,down);
 
-            for(int x = 0; x< computerHits.size()){
+            for(int x = 0; x< computerHits.size(); x++){
                 if (computerHits.get(x).equals(point) == true)
                     break;
             }
-            for(int x = 0; x< computerMisses.size()){
+            for(int x = 0; x< computerMisses.size(); x++){
                 if (computerMisses.get(x).equals(point) == true)
                     break;
             }
@@ -222,7 +222,7 @@ public class BattleshipModel {
 
     }
     private void AIHitsAndMisses(Point point){
-        if(aircraftCarrier.AIShipHitCheck(point,aircraftCarrier) == true || battleship.AIShipHitCheck(point,battleship) == true) ||
+        if(aircraftCarrier.AIShipHitCheck(point,aircraftCarrier) == true || battleship.AIShipHitCheck(point,battleship) == true ||
         cruiser.AIShipHitCheck(point,cruiser) == true || destroyer.AIShipHitCheck(point,destroyer) == true ||
                 submarine.AIShipHitCheck(point,submarine) == true){
             playerHits.add(point);
@@ -232,11 +232,11 @@ public class BattleshipModel {
         }
 
 }
-    private void fire(){
+    private void fire() {
         //  userFire();  ->NEEDS IMPLEMENTATION
         Point point = AIfirePoint();
         AIHitsAndMisses(point);
-
+    }
 
 
     public void placeComputerShips(){
