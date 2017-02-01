@@ -1,7 +1,5 @@
 package edu.oregonstate.cs361.battleship;
 
-
-import java.applet.Applet;
 import java.util.*;
 
 
