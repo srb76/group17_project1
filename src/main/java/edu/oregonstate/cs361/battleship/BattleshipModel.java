@@ -133,27 +133,34 @@ public class BattleshipModel {
             return "Failure: Placement out of bounds";
         }
         //checks name to make sure that the ship exists
+
+
         ship toAdd;
         int length;
         if(aircraftCarrier.checkName(id)) {
             toAdd = aircraftCarrier;
-            length = 5;
+            length = toAdd.getLength();
+            System.out.println("Ship: " + toAdd.getName() + "Length: " + toAdd.getLength());
         }
         else if(battleship.checkName(id)) {
             toAdd = battleship;
-            length = 4;
+            length = toAdd.getLength();
+            System.out.println("Ship: " + toAdd.getName() + "Length: " + toAdd.getLength());
         }
         else if (cruiser.checkName(id)) {
             toAdd = cruiser;
-            length = 3;
+            length = toAdd.getLength();
+            System.out.println("Ship: " + toAdd.getName() + "Length: " + toAdd.getLength());
         }
         else if(destroyer.checkName(id)) {
             toAdd = destroyer;
-            length = 2;
+            length = toAdd.getLength();
+            System.out.println("Ship: " + toAdd.getName() + "Length: " + toAdd.getLength());
         }
         else if(submarine.checkName(id)){
             toAdd = submarine;
-            length = 2;
+            length = toAdd.getLength();
+            System.out.println("Ship: " + toAdd.getName() + "Length: " + toAdd.getLength());
         }
         else
             return "Failure: Ship does not exist";
@@ -196,14 +203,21 @@ public class BattleshipModel {
     }
 
     public void placeComputerShips(){
+
+        //create an array of all ships to place
         ship[] computerShips = {computer_aircraftCarrier,computer_battleShip,computer_cruiser,computer_destroyer,computer_submarine};
+
+        //initialize our array list of points
         AI_Points = new ArrayList<Point>();
         int counter = 0;
+
+        //while we have not been through all the ships:
         while(counter < computerShips.length){
 
+            //get current ship out of the array
             ship currentShip = computerShips[counter];
 
-            boolean test = false;
+            boolean test = false; //this will turn true once it passes isValidMove()
 
             while(!test) {
 
@@ -215,27 +229,30 @@ public class BattleshipModel {
                 else
                     orientation = "vertical";
 
-
+                //get a random x,y value for start point
                 int tempAcross = (int) (Math.random() * 10 + 1);
                 int tempDown = (int) (Math.random() * 10 + 1);
 
-
-                if (isValidMove(currentShip.getLength(), orientation, tempAcross, tempDown)){
+                //checks if these are valid coordinates
+                if (isValidComputerMove(currentShip.getLength(), orientation, tempAcross, tempDown)){
                     test=true;
 
-                    //add points to computer points array
+                    //add points to array list of compputer points
                     for(int i = 0; i < currentShip.getLength(); i++){
+
+                        //adds points moving horizontally away from start
                         if(orientation == "horizontal") {
                             Point temp = new Point(tempAcross+i, tempDown);
                             AI_Points.add(temp);
                         }
+                        //adds points moving vertically away from start
                         else{
                             Point temp = new Point(tempAcross, tempDown+i);
                             AI_Points.add(temp);
                         }
 
                     }
-
+                    //test prints
                     System.out.println("orientation:" + orientation);
                     System.out.println("Across:" + tempAcross);
                     System.out.println("Down:" + tempDown);
@@ -245,13 +262,16 @@ public class BattleshipModel {
                 }
 
             }
-
+            //go to next computer ship
             counter++;
 
         }
 
     }
-    private boolean isValidMove(int length, String orientation, int across, int down){
+
+    private boolean isValidComputerMove(int length, String orientation, int across, int down){
+
+        //first check to see if it runs off the page
         if(orientation == "horizontal"){
             if((across + length) > 10)
                 return false;
@@ -263,7 +283,7 @@ public class BattleshipModel {
 
         ArrayList<Point> temp_Points = new ArrayList<Point>();
 
-        //add points to computer points array
+        //add points to temp array list of current points
         for(int i = 0; i < length; i++){
             if(orientation == "horizontal") {
                 Point temp = new Point(across+i, down);
@@ -276,6 +296,8 @@ public class BattleshipModel {
 
         }
 
+
+        //iterates though both array lists to see if any points are the same (an overlap)
         for(int i = 0; i < temp_Points.size(); i++){
             Point checkPoint = temp_Points.get(i);
 
@@ -294,6 +316,7 @@ public class BattleshipModel {
 
         }
 
+        //if all tests pass, return true
         return true;
     }
 }
