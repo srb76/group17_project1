@@ -206,28 +206,44 @@ public class BattleshipModel {
 
     public boolean hasFired(int x, int y) {
         //Checks if passed location has been fired at before
-        //returns true if
+        //returns true if location has not been fired before
         //Assign vars
         int row = x;
         int col = y;
+        int pAcross, pDown;
         boolean newFire = true;
         ArrayList<Point> hits = this.playerHits;
+        ArrayList<Point> misses = this.playerMisses;
 
         //Check if shot has already hit
-        /*
         for (Point hit: hits)
         {
             //check each playerHits for match
-        }
-        //Check if shot has already missed
+            pAcross = hit.getAcross();
+            pDown = hit.getDown();
 
-*/
+            if (x==pAcross && y==pDown)
+                return false;
+        }
+
+        //Check if shot has already missed
+        for (Point miss: misses)
+        {
+            //Check each playerMisses for match
+            pAcross = miss.getAcross();
+            pDown = miss.getDown();
+
+            if (x==pAcross && y==pDown)
+                return false;
+        }
+
         return newFire;
     }
 
     public void hitShip(int x, int y) {
         //Checks to see if a shot location hits any ships
         //and adds to playerHits or playerMisses accordingly
+
     }
 
     // returns false if it doesn't over lap any other ships returns true if it does

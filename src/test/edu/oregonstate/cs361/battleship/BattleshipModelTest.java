@@ -76,5 +76,12 @@ class BattleshipModelTest {
         assertEquals(result, horizontal);
     }
 
+    @Test
+    void testFireAt () {
+        BattleshipModel test = new BattleshipModel();
+        boolean newHit = test.hasFired(1,1);
+        assertEquals(false, newHit);
+    }
+
 
 }

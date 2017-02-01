@@ -102,7 +102,7 @@ public class Main {
         noError = gameState.shotInBounds(numRow,numCol);
 
         //Test if shot has already been attempted
-        //noError = gameState.hasFired(numRow,numCol);
+        noError = gameState.hasFired(numRow,numCol);
 
         //Check if fire location is a hit or miss and update gamestate accordingly
         //gameState.hitShip(numRow,numCol);
