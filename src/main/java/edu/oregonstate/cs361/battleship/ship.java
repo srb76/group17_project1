@@ -11,6 +11,13 @@ public class ship {
     private Point start;
     private Point end;
 
+    public String getName(){
+        return this.name;
+    }
+    public int getLength(){
+        return this.length;
+    }
+
     // default constructor
     public ship(){
         name = null;
