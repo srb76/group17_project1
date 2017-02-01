@@ -106,4 +106,28 @@ public class ship {
     public void setEnd(int across, int down) {
         end.setPoint(across, down);
     }
-}
+
+    public boolean AIShipHitCheck(Point point,ship check){
+        int horizontalCheck = check.start.acrossLength(check.end);
+        if(point == check.start || point == check.end)
+            return true;
+        Point checkPoint = new Point();
+        checkPoint.setPoint(check.start.getAcross(), check.start.getDown());
+            for(int x = 0; x < check.length; ++x) {
+                if (point.equals(checkPoint)) {
+                    return true;
+                }
+                if (horizontalCheck != 0) {
+                    checkPoint.setPoint(checkPoint.getAcross() + 1, checkPoint.getDown());
+                }
+                else {
+                    checkPoint.setPoint(checkPoint.getAcross(), checkPoint.getDown() + 1);
+                }
+            }
+        return false;
+
+            }
+
+
+    }
+

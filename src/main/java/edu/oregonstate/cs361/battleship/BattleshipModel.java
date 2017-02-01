@@ -202,6 +202,43 @@ public class BattleshipModel {
         return aircraftCarrier.shipOverlap(toCheck) || battleship.shipOverlap(toCheck) || cruiser.shipOverlap(toCheck) || destroyer.shipOverlap(toCheck) || submarine.shipOverlap(toCheck);
     }
 
+    private Point AIfirePoint(){
+        Random rand = new Random();
+        while(true){
+            int across = rand.nextInt(9)+1;
+            int down = rand.nextInt(9)+1;
+            Point point = new Point(across,down);
+
+            for(int x = 0; x< computerHits.size()){
+                if (computerHits.get(x).equals(point) == true)
+                    break;
+            }
+            for(int x = 0; x< computerMisses.size()){
+                if (computerMisses.get(x).equals(point) == true)
+                    break;
+            }
+            return point;
+        }
+
+    }
+    private void AIHitsAndMisses(Point point){
+        if(aircraftCarrier.AIShipHitCheck(point,aircraftCarrier) == true || battleship.AIShipHitCheck(point,battleship) == true) ||
+        cruiser.AIShipHitCheck(point,cruiser) == true || destroyer.AIShipHitCheck(point,destroyer) == true ||
+                submarine.AIShipHitCheck(point,submarine) == true){
+            playerHits.add(point);
+        }
+        else{
+            playerMisses.add(point);
+        }
+
+}
+    private void fire(){
+        //  userFire();  ->NEEDS IMPLEMENTATION
+        Point point = AIfirePoint();
+        AIHitsAndMisses(point);
+
+
+
     public void placeComputerShips(){
 
         //create an array of all ships to place
@@ -327,5 +364,6 @@ public class BattleshipModel {
 
         //if all tests pass, return true
         return true;
+
     }
 }
