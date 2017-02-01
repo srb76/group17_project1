@@ -47,6 +47,32 @@ class MainTest {
         assertEquals("HOLY SHIP",res.body);
     }
 
+    @Test
+    public void testFireAtValid() {
+        //Fire attempt at (2,2)
+        TestResponse res = request( "POST", "/fire/2/2");
+        assertEquals(200, res.status);
+        assertEquals("FIRE: 2,2", res.body);
+    }
+
+    @Test
+    public void testFireAtInvalidRow() {
+        //Fire attempt at (0,3)
+        //Location is off board and should return error
+        TestResponse res = request( "POST", "/fire/0/3");
+        assertEquals( 200, res.status);
+        assertEquals( "ERROR: out of bounds", res.body);
+    }
+
+    @Test
+    public void testFireAtInvalidCol() {
+        //Fire attempt at (4,0)
+        //Location is off board and should return error
+        TestResponse res = request( "POST", "/fire/4/0");
+        assertEquals( 200, res.status);
+        assertEquals( "ERROR: out of bounds", res.body);
+    }
+
     private TestResponse request(String method, String path) {
         try {
             URL url = new URL("http://localhost:4567" + path);

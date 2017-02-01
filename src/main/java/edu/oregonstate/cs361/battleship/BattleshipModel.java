@@ -114,4 +114,46 @@ public class BattleshipModel {
             System.out.println("Computer Misses " + computerMisses);
     }
 
+    public static boolean shotInBounds(int x, int y) {
+        //Checks if given x,y coordinate is within the 1-9 board
+        //Returns true for valid shot coordinates
+        //Returns false for invalid shot coordinates
+
+        //Assign vars
+        int row = x;
+        int col = y;
+        boolean inBounds = true;
+
+        //Check if row in on board
+        if (row > 10 || row < 1)
+            inBounds = false;
+
+        //Check if col in on board
+        else if (col > 10 || col < 1)
+            inBounds = false;
+
+        return inBounds;
+    }
+
+    public boolean hasFired(int x, int y) {
+        //Checks if passed location has been fired at before
+        //returns true if
+        //Assign vars
+        int row = x;
+        int col = y;
+        boolean newFire = true;
+        ArrayList<Point> hits = this.playerHits;
+
+        //Check if shot has already hit
+        /*
+        for (Point hit: hits)
+        {
+            //check each playerHits for match
+        }
+        //Check if shot has already missed
+
+*/
+        return newFire;
+    }
+
 }

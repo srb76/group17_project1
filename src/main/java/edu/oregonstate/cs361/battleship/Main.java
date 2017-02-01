@@ -38,7 +38,10 @@ public class Main {
 
     //This function should accept an HTTP request and deseralize it into an actual Java object.
     private static BattleshipModel getModelFromReq(Request req){
-        return null;
+        String model = req.body();
+        Gson gson = new Gson();
+        BattleshipModel newModel = gson.fromJson(model, BattleshipModel.class);
+        return newModel;
     }
 
     //This controller should take a json object from the front end, and place the ship as requested, and then return the object.
@@ -52,7 +55,32 @@ public class Main {
 
     //Similar to placeShip, but with firing.
     private static String fireAt(Request req) {
-        return null;
+        String row = req.params(":row");
+        String col = req.params(":col");
+        String result = "";
+        boolean noError = true;
+        BattleshipModel gameState;
+
+        //Convert row and col strings to integer
+        int numRow = Integer.parseInt(row);
+        int numCol = Integer.parseInt(col);
+
+        //Get battleship model from request
+        gameState = getModelFromReq(req);
+
+        //Test for shot in bounds
+        noError = gameState.shotInBounds(numRow,numCol);
+
+        //Test if shot has already been attempted
+        noError = gameState.hasFired(numRow,numCol);
+
+        //Set result
+        if (noError)
+            result += "FIRE: " + row + "," + col;
+        else
+            result += "ERROR: out of bounds";
+
+        return result;
     }
 
 }
