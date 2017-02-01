@@ -29,6 +29,7 @@ public class Main {
         post("/placeShip/:id/:row/:col/:orientation", (req, res) -> placeShip(res, req));
     }
 
+
     //This function should return a new model
     static String newModel() {
         BattleshipModel test = new BattleshipModel();
@@ -64,6 +65,7 @@ public class Main {
         int across = Integer.parseInt(row);
         int down = Integer.parseInt(col);
 
+        newModel.placeComputerShips();
         //Attepts to place the ship and checks the result
         String result = newModel.placeShip(id, across, down, orientation);
 
@@ -81,6 +83,8 @@ public class Main {
         res.status(200);
         return model;
     }
+
+
 
     //Similar to placeShip, but with firing.
     private static String fireAt(Request req) {

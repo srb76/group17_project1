@@ -27,9 +27,13 @@ public class BattleshipModel {
     private ArrayList<Point> computerHits;
     private ArrayList<Point> computerMisses;
 
+    //this will tell us if its a brand new game
+    private boolean init;
+
+
     public BattleshipModel() {
         Point x = new Point(0, 0);
-
+        init = true;
         aircraftCarrier = new ship("AircraftCarrier", 5, x, x);
         battleship = new ship("Battleship", 4, x, x);
         cruiser = new ship("Cruiser", 3, x, x);
@@ -186,5 +190,42 @@ public class BattleshipModel {
     // returns false if it doesn't over lap any other ships returns true if it does
     private boolean checkShipOverlap(ship toCheck) {
         return aircraftCarrier.shipOverlap(toCheck) || battleship.shipOverlap(toCheck) || cruiser.shipOverlap(toCheck) || destroyer.shipOverlap(toCheck) || submarine.shipOverlap(toCheck);
+    }
+
+    public void placeComputerShips(){
+        ship[] computerShips = {computer_aircraftCarrier,computer_battleShip,computer_cruiser,computer_destroyer,computer_submarine};
+        int counter = 0;
+        while(counter < computerShips.length){
+
+            ship currentShip = computerShips[counter];
+
+            //get a random orientation
+            int randomOrientation = (int)(Math.random()*2);
+            String orientation = "";
+            if(randomOrientation == 0)
+                orientation = "horizontal";
+            else
+                orientation = "vertical";
+
+
+            int tempAcross = (int)(Math.random()*10 +1);
+            int tempDown = (int)(Math.random()*10 +1);
+            System.out.println("orientation:" + orientation);
+            System.out.println("Across:" + tempAcross);
+            System.out.println("Down:" + tempDown);
+            System.out.println(currentShip.getName());
+            System.out.println("Length: " + currentShip.getLength());
+
+
+
+            counter++;
+
+        }
+
+    }
+    private boolean isValidMove(int length, String orientation, int across, int down){
+        if(across + length)
+
+        return false;
     }
 }
