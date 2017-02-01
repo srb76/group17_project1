@@ -21,12 +21,13 @@ public class Point {
         this.Across = across;
         this.Down = down;
     }
-
+/*
+    for testing only!
     public void display(){
         System.out.println("Across: "+ Across);
         System.out.println("Down: "+ Down);
     }
-
+*/
     public int getAcross(){
         return Across;
     }
@@ -35,8 +36,36 @@ public class Point {
         return Down;
     }
 
-    public void setPoint(int down, int across){
+    public void setPoint(int across, int down){
         Down = down;
         Across = across;
     }
+
+    public boolean equals(Point p) {
+        if (Across == p.Across && Down == p.Down) {
+            return true;
+        }
+        return false;
+    }
+
+    public int acrossLength(Point p){
+        int length;
+        if(p.Across >= Across){
+            length = p.Across - Across;
+        } else{
+            length = Across - p.Across;
+        }
+        return length;
+    }
+
+    public int downLength(Point p){
+        int length;
+        if(p.Down >= Down ){
+            length = p.Down - Down;
+        } else {
+            length = Down - p.Down;
+        }
+        return length;
+    }
+
 }
