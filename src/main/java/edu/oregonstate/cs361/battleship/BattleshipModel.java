@@ -243,24 +243,25 @@ public class BattleshipModel {
                         //adds points moving horizontally away from start
                         if(orientation == "horizontal") {
                             Point temp = new Point(tempAcross+i, tempDown);
-                            System.out.println("Adding Point: (" + temp.getAcross() +", " + temp.getDown() + ")");
+                            //System.out.println("Adding Point: (" + temp.getAcross() +", " + temp.getDown() + ")");
                             AI_Points.add(temp);
                         }
                         //adds points moving vertically away from start
                         else{
                             Point temp = new Point(tempAcross, tempDown+i);
-                            System.out.println("Adding Point: (" + temp.getAcross() +", " + temp.getDown() + ")");
+                            //System.out.println("Adding Point: (" + temp.getAcross() +", " + temp.getDown() + ")");
                             AI_Points.add(temp);
                         }
 
                     }
                     //test prints
+                    /*
                     System.out.println("orientation:" + orientation);
                     System.out.println("Across:" + tempAcross);
                     System.out.println("Down:" + tempDown);
                     System.out.println(currentShip.getName());
                     System.out.println("Length: " + currentShip.getLength());
-                    System.out.println(AI_Points.toString());
+                    System.out.println(AI_Points.toString());*/
                 }
 
             }
@@ -312,11 +313,11 @@ public class BattleshipModel {
             int counter = 0;
             while(counter < myPoints.size()){
 
-                System.out.println("Comparing myPoint(" + checkPoint.getAcross()+ ", " + checkPoint.getDown() +") " +
-                        "and AI POINT (" + myPoints.get(counter).getAcross() + ", " + myPoints.get(counter).getDown()+ ")");
+                //System.out.println("Comparing myPoint(" + checkPoint.getAcross()+ ", " + checkPoint.getDown() +") " +
+                //        "and AI POINT (" + myPoints.get(counter).getAcross() + ", " + myPoints.get(counter).getDown()+ ")");
 
                 if((checkPoint.getAcross() == (myPoints.get(counter).getAcross())) && (checkPoint.getDown() == (myPoints.get(counter).getDown()))){
-                    System.out.println("Overlapping points");
+                    //System.out.println("Overlapping points");
                     return false;
                 }
                 counter++;
