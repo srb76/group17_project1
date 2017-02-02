@@ -198,6 +198,63 @@ public class BattleshipModel {
         return "Success: Placed " + id + " at " + across + ", " + down;
     }
 
+    public static boolean shotInBounds(int x, int y) {
+        //Checks if given x,y coordinate is within the 1-9 board
+        //Returns true for valid shot coordinates
+        //Returns false for invalid shot coordinates
+
+        //Assign vars
+        int row = x;
+        int col = y;
+        boolean inBounds = true;
+
+        //Check if row in on board
+        if (row > 10 || row < 1)
+            inBounds = false;
+
+        //Check if col in on board
+        else if (col > 10 || col < 1)
+            inBounds = false;
+
+        return inBounds;
+    }
+
+    public boolean hasFired(int x, int y) {
+        //Checks if passed location has been fired at before
+        //returns true if location has not been fired before
+        //Assign vars
+        int row = x;
+        int col = y;
+        int pAcross, pDown;
+        boolean newFire = true;
+        ArrayList<Point> hits = this.computerHits;
+        ArrayList<Point> misses = this.computerMisses;
+
+        //Check if shot has already hit
+        for (Point hit: hits)
+        {
+            //check each computerHits for match
+            pAcross = hit.getAcross();
+            pDown = hit.getDown();
+
+            if (x==pAcross && y==pDown)
+                return false;
+        }
+
+        //Check if shot has already missed
+        for (Point miss: misses)
+        {
+            //Check each computerMisses for match
+            pAcross = miss.getAcross();
+            pDown = miss.getDown();
+
+            if (x==pAcross && y==pDown)
+                return false;
+        }
+
+        return newFire;
+    }
+
     // returns false if it doesn't over lap any other ships returns true if it does
     private boolean checkShipOverlap(ship toCheck) {
         return aircraftCarrier.shipOverlap(toCheck) || battleship.shipOverlap(toCheck) || cruiser.shipOverlap(toCheck) || destroyer.shipOverlap(toCheck) || submarine.shipOverlap(toCheck);
@@ -233,6 +290,25 @@ public class BattleshipModel {
         }
 
 }
+
+    //The player equivalent of AIHitsAndMisses
+    //String is returned only for testing purposes
+    public String PlayerHitsAndMisses(Point point){
+        String result;
+
+        if(computer_aircraftCarrier.AIShipHitCheck(point,computer_aircraftCarrier) == true || computer_battleShip.AIShipHitCheck(point,computer_battleShip) == true ||
+                computer_cruiser.AIShipHitCheck(point,computer_cruiser) == true || computer_destroyer.AIShipHitCheck(point,computer_destroyer) == true ||
+                computer_submarine.AIShipHitCheck(point,computer_submarine) == true){
+            computerHits.add(point);
+            result = "Hit!";
+        }
+        else{
+            computerMisses.add(point);
+            result = "Miss!";
+        }
+        return result;
+
+    }
     private void fire() {
         //  userFire();  ->NEEDS IMPLEMENTATION
         Point point = AIfirePoint();

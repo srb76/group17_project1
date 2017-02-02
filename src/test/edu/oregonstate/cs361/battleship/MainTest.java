@@ -51,6 +51,47 @@ class MainTest {
         assertEquals(res.status, 200);
     }
 
+
+
+
+    @Test
+    public void testFireAtInvalidRow() {
+        //Fire attempt at (0,3)
+        //Location is off board and should return error
+        // creates an object to send to the server
+        BattleshipModel test = new BattleshipModel();
+        Gson gson = new Gson();
+        String model = gson.toJson(test);
+
+        TestResponse res = request( "POST", "/fire/0/3", model);
+        assertEquals( 400, res.status);
+        assertEquals( "Invalid fire location! That shot was off the board.", res.body);
+    }
+
+    @Test
+    public void testFireAtInvalidCol() {
+        //Fire attempt at (4,0)
+        //Location is off board and should return error
+        //creates a model to send to the server.
+        BattleshipModel test = new BattleshipModel();
+        Gson gson = new Gson();
+        String model = gson.toJson(test);
+
+        TestResponse res = request( "POST", "/fire/4/0", model);
+        assertEquals( 400, res.status);
+        assertEquals( "Invalid fire location! That shot was off the board.", res.body);
+    }
+
+    @Test
+    public void testValidFire(){
+        BattleshipModel test = new BattleshipModel();
+        Gson gson = new Gson();
+        String model = gson.toJson(test);
+
+        TestResponse res = request( "POST", "/fire/4/1", model);
+        assertEquals( 200, res.status);
+    }
+
     private TestResponse request(String method, String path, String body) {
         try {
             URL url = new URL("http://localhost:4567" + path);

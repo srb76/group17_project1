@@ -76,5 +76,43 @@ class BattleshipModelTest {
         assertEquals(result, horizontal);
     }
 
+    //Tests if a shot is within the bounds of the board (1-10)
+    @Test
+    public void testShotInBounds() {
+        BattleshipModel test = new BattleshipModel();
+        boolean validShot, badShot;
+        validShot = test.shotInBounds(1,1);
+        badShot = test.shotInBounds(0,20);
+        assertEquals(validShot,true);
+        assertEquals(badShot,false);
+    }
+
+    //tests a shot at (1,1), should return true to indicate this is a new firing location
+    @Test
+    void testHasFired () {
+        BattleshipModel test = new BattleshipModel();
+        boolean newHit = test.hasFired(1,1);
+        assertEquals(true, newHit);
+    }
+
+    //tests PlayerHitsAndMisses for a missed shot
+    @Test
+    void testMiss () {
+        String result = "";
+        BattleshipModel test = new BattleshipModel();
+        Point testShot = new Point(1,1);
+        result = test.PlayerHitsAndMisses(testShot); //Should miss
+        assertEquals("Miss!",result);
+    }
+
+    //tests PlayerHitsAndMisses for a hit shot (on default location of ships)
+    @Test
+    void testHit () {
+        String result = "";
+        BattleshipModel test = new BattleshipModel();
+        Point testShot = new Point(0,0);
+        result = test.PlayerHitsAndMisses(testShot);
+        assertEquals("Hit!",result);
+    }
 
 }
