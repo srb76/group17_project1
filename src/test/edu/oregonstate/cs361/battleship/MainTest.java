@@ -52,7 +52,7 @@ class MainTest {
         //Fire attempt at (0,3)
         //Location is off board and should return error
         TestResponse res = request( "POST", "/fire/0/3");
-        assertEquals( 200, res.status);
+        assertEquals( 400, res.status);
         assertEquals( "Invalid fire location! That shot was off the board.", res.body);
     }
 
@@ -61,7 +61,7 @@ class MainTest {
         //Fire attempt at (4,0)
         //Location is off board and should return error
         TestResponse res = request( "POST", "/fire/4/0");
-        assertEquals( 200, res.status);
+        assertEquals( 400, res.status);
         assertEquals( "Invalid fire location! That shot was off the board.", res.body);
     }
 
