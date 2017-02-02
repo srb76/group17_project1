@@ -27,7 +27,7 @@ public class Main {
         //This will listen to GET requests to /model and return a clean new model
         get("/model", (req, res) -> newModel());
         //This will listen to POST requests and expects to receive a game model, as well as location to fire to
-        post("/fire/:row/:col", (req, res) -> fireAt(req));
+        post("/fire/:row/:col", (req, res) -> fireAt(res,req));
         //This will listen to POST requests and expects to receive a game model, as well as location to place the ship
         post("/placeShip/:id/:row/:col/:orientation", (req, res) -> placeShip(res, req));
     }
@@ -90,8 +90,54 @@ public class Main {
 
 
     //Similar to placeShip, but with firing.
-    private static String fireAt(Request req) {
-        return null;
+    private static String fireAt(Response res, Request req) {
+        String row = req.params(":row");
+        String col = req.params(":col");
+        String result = "";
+        boolean noError = true;
+        BattleshipModel gameState;
+        Gson gson = new Gson();
+        Point fireLocation = new Point();
+
+        //Convert row and col strings to integer
+        int down = Integer.parseInt(row);
+        int across = Integer.parseInt(col);
+
+        //Get battleship model from request
+        gameState = getModelFromReq(req);
+
+        //Test for shot in bounds
+        noError = gameState.shotInBounds(across, down);
+
+        //Test if shot has already been attempted
+        if (noError)
+            noError = gameState.hasFired(across, down);
+        else {
+            //Alter error message for out of bounds shot
+            result = "Invalid fire location! That shot was off the board.";
+            res.status(400);
+        }
+
+        //Check if fire location is a hit or miss and update gamestate accordingly
+        fireLocation.setPoint(across, down);
+        if (noError) {
+            //Fire at location and update computer hits and misses
+            gameState.PlayerHitsAndMisses(fireLocation);
+
+            //Have AI fire here?
+
+            //Convert game state back to JSON
+            result = gson.toJson(gameState);
+        }
+        else if (!result.contains("Invalid"))
+        {
+            //Alter error message for a shot that has already been attempted
+            result = "Invalid fire location! You have already fired at that location!";
+            res.status(400);
+        }
+
+        //JSON string is returned if no errors were detected, otherwise a string containing the error message is returned
+        return result;
     }
 
 }
