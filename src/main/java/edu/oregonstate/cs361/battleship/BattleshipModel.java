@@ -226,13 +226,13 @@ public class BattleshipModel {
         int col = y;
         int pAcross, pDown;
         boolean newFire = true;
-        ArrayList<Point> hits = this.playerHits;
-        ArrayList<Point> misses = this.playerMisses;
+        ArrayList<Point> hits = this.computerHits;
+        ArrayList<Point> misses = this.computerMisses;
 
         //Check if shot has already hit
         for (Point hit: hits)
         {
-            //check each playerHits for match
+            //check each computerHits for match
             pAcross = hit.getAcross();
             pDown = hit.getDown();
 
@@ -243,7 +243,7 @@ public class BattleshipModel {
         //Check if shot has already missed
         for (Point miss: misses)
         {
-            //Check each playerMisses for match
+            //Check each computerMisses for match
             pAcross = miss.getAcross();
             pDown = miss.getDown();
 
@@ -252,12 +252,6 @@ public class BattleshipModel {
         }
 
         return newFire;
-    }
-
-    public void hitShip(int x, int y) {
-        //Checks to see if a shot location hits any ships
-        //and adds to playerHits or playerMisses accordingly
-
     }
 
     // returns false if it doesn't over lap any other ships returns true if it does
@@ -297,12 +291,13 @@ public class BattleshipModel {
 }
 
     //The player equivalent of AIHitsAndMisses
+    //String is returned only for testing purposes
     public String PlayerHitsAndMisses(Point point){
         String result;
 
-        if(aircraftCarrier.AIShipHitCheck(point,aircraftCarrier) == true || battleship.AIShipHitCheck(point,battleship) == true ||
-                cruiser.AIShipHitCheck(point,cruiser) == true || destroyer.AIShipHitCheck(point,destroyer) == true ||
-                submarine.AIShipHitCheck(point,submarine) == true){
+        if(computer_aircraftCarrier.AIShipHitCheck(point,computer_aircraftCarrier) == true || computer_battleShip.AIShipHitCheck(point,computer_battleShip) == true ||
+                computer_cruiser.AIShipHitCheck(point,computer_cruiser) == true || computer_destroyer.AIShipHitCheck(point,computer_destroyer) == true ||
+                computer_submarine.AIShipHitCheck(point,computer_submarine) == true){
             computerHits.add(point);
             result = "Hit!";
         }

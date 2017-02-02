@@ -48,14 +48,6 @@ class MainTest {
     }
 
     @Test
-    public void testFireAtValid() {
-        //Fire attempt at (2,2)
-        TestResponse res = request( "POST", "/fire/2/2");
-        assertEquals(200, res.status);
-        assertEquals("FIRE: 2,2", res.body);
-    }
-
-    @Test
     public void testFireAtInvalidRow() {
         //Fire attempt at (0,3)
         //Location is off board and should return error

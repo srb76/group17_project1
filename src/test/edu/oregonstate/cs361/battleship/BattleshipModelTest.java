@@ -76,7 +76,18 @@ class BattleshipModelTest {
         assertEquals(result, horizontal);
     }
 
-    //tests a shot at 1,1 with no ships present there, should return true to indicate this is a new firing location
+    //Tests if a shot is within the bounds of the board (1-10)
+    @Test
+    public void testShotInBounds() {
+        BattleshipModel test = new BattleshipModel();
+        boolean validShot, badShot;
+        validShot = test.shotInBounds(1,1);
+        badShot = test.shotInBounds(0,20);
+        assertEquals(validShot,true);
+        assertEquals(badShot,false);
+    }
+
+    //tests a shot at (1,1), should return true to indicate this is a new firing location
     @Test
     void testHasFired () {
         BattleshipModel test = new BattleshipModel();
