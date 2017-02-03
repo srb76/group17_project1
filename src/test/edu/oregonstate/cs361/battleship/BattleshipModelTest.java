@@ -87,12 +87,19 @@ class BattleshipModelTest {
         assertEquals(badShot,false);
     }
 
-    //tests a shot at (1,1), should return true to indicate this is a new firing location
+    //tests a shot at (1,1) and (2,2), should return true and false to indicate this is a new firing location
     @Test
     void testHasFired () {
         BattleshipModel test = new BattleshipModel();
+        Point testPoint = new Point(2,2);
+
+        //Add a point to misses
+        test.PlayerHitsAndMisses(testPoint);
+
         boolean newHit = test.hasFired(1,1);
+        boolean badHit = test.hasFired(2,2);
         assertEquals(true, newHit);
+        assertEquals(false,badHit);
     }
 
     //tests PlayerHitsAndMisses for a missed shot
