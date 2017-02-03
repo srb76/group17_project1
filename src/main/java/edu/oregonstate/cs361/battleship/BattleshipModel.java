@@ -94,6 +94,7 @@ public class BattleshipModel {
         playerMisses = new ArrayList<Point>(toCopy.playerMisses);
         computerHits = new ArrayList<Point>(toCopy.computerHits);
         computerMisses = new ArrayList<Point>(toCopy.computerMisses);
+        HUMAN_Points = new ArrayList<Point>(toCopy.HUMAN_Points);
     }
 
     //Displays the game state to the console
