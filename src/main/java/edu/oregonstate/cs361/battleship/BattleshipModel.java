@@ -260,7 +260,7 @@ public class BattleshipModel {
         return aircraftCarrier.shipOverlap(toCheck) || battleship.shipOverlap(toCheck) || cruiser.shipOverlap(toCheck) || destroyer.shipOverlap(toCheck) || submarine.shipOverlap(toCheck);
     }
 
-    private Point AIfirePoint(){
+    public Point AIfirePoint(){
         Random rand = new Random();
         while(true){
             int across = rand.nextInt(9)+1;
@@ -279,7 +279,7 @@ public class BattleshipModel {
         }
 
     }
-    private void AIHitsAndMisses(Point point){
+    public void AIHitsAndMisses(Point point){
         if(aircraftCarrier.AIShipHitCheck(point,aircraftCarrier) == true || battleship.AIShipHitCheck(point,battleship) == true ||
         cruiser.AIShipHitCheck(point,cruiser) == true || destroyer.AIShipHitCheck(point,destroyer) == true ||
                 submarine.AIShipHitCheck(point,submarine) == true){
@@ -308,11 +308,6 @@ public class BattleshipModel {
         }
         return result;
 
-    }
-    private void fire() {
-        //  userFire();  ->NEEDS IMPLEMENTATION
-        Point point = AIfirePoint();
-        AIHitsAndMisses(point);
     }
 
 
@@ -384,6 +379,10 @@ public class BattleshipModel {
 
         }
 
+    }
+
+    public int get_AI_Point_Length(){
+        return AI_Points.size();
     }
 
     private boolean isValidComputerMove(int length, String orientation, int across, int down, boolean isHuman){

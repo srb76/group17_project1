@@ -18,9 +18,6 @@ import static spark.Spark.staticFiles;
 public class Main {
     public static void main(String[] args) {
 
-        BattleshipModel init = new BattleshipModel();
-        init.placeComputerShips();
-
         //This will allow us to server the static pages such as index.html, app.js, etc.
         staticFiles.location("/public");
 
@@ -36,6 +33,7 @@ public class Main {
     //This function should return a new model
     static String newModel() {
         BattleshipModel test = new BattleshipModel();
+        test.placeComputerShips();
         Gson gson = new Gson();
         String model = new String(gson.toJson(test));
         //System.out.println(model);
@@ -100,6 +98,7 @@ public class Main {
         Point fireLocation = new Point();
 
         //Convert row and col strings to integer
+
         int down = Integer.parseInt(row);
         int across = Integer.parseInt(col);
 
@@ -110,6 +109,7 @@ public class Main {
         noError = gameState.shotInBounds(across, down);
 
         //Test if shot has already been attempted
+
         if (noError)
             noError = gameState.hasFired(across, down);
         else {
@@ -124,7 +124,10 @@ public class Main {
             //Fire at location and update computer hits and misses
             gameState.PlayerHitsAndMisses(fireLocation);
 
-            //Have AI fire here?
+            Point AIFire = new Point();
+            BattleshipModel method = new BattleshipModel();
+             AIFire = method.AIfirePoint();
+            method.AIHitsAndMisses(AIFire);
 
             //Convert game state back to JSON
             result = gson.toJson(gameState);
