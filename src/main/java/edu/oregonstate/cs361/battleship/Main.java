@@ -125,9 +125,8 @@ public class Main {
             gameState.PlayerHitsAndMisses(fireLocation);
 
             Point AIFire = new Point();
-            BattleshipModel method = new BattleshipModel();
-             AIFire = method.AIfirePoint();
-            method.AIHitsAndMisses(AIFire);
+             AIFire = gameState.AIfirePoint();
+            gameState.AIHitsAndMisses(AIFire);
 
             //Convert game state back to JSON
             result = gson.toJson(gameState);
