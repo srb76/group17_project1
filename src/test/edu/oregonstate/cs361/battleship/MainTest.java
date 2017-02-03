@@ -9,6 +9,7 @@ import spark.Spark;
 import spark.utils.IOUtils;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
@@ -36,47 +37,77 @@ class MainTest {
 
     @Test
     public void testGetModel() {
-        TestResponse res = request("GET", "/model");
+        TestResponse res = request("GET", "/model", null);
         assertEquals(200, res.status);
         //assertEquals("MODEL",res.body);
     }
 
     @Test
     public void testPlaceShip() {
-        TestResponse res = request("POST", "/placeShip/battleShip/1/1/horizontal");
+        BattleshipModel test = new BattleshipModel();
+        Gson gson = new Gson();
+        String model = gson.toJson(test);
+        TestResponse res = request("POST", "/placeShip/battleShip/1/1/horizontal", model);
         assertEquals(res.status, 200);
     }
+
+
+
 
     @Test
     public void testFireAtInvalidRow() {
         //Fire attempt at (0,3)
         //Location is off board and should return error
-        TestResponse res = request( "POST", "/fire/0/3");
-        assertEquals( 400, res.status);
-        assertEquals( "Invalid fire location! That shot was off the board.", res.body);
+        // creates an object to send to the server
+        BattleshipModel test = new BattleshipModel();
+        Gson gson = new Gson();
+        String model = gson.toJson(test);
+
+        TestResponse res = request( "POST", "/fire/0/3", model);
+        assertEquals(res, null);
+        //assertEquals( "Invalid fire location! That shot was off the board.", res.body);
     }
 
     @Test
     public void testFireAtInvalidCol() {
         //Fire attempt at (4,0)
         //Location is off board and should return error
-        TestResponse res = request( "POST", "/fire/4/0");
-        assertEquals( 400, res.status);
-        assertEquals( "Invalid fire location! That shot was off the board.", res.body);
+        //creates a model to send to the server.
+        BattleshipModel test = new BattleshipModel();
+        Gson gson = new Gson();
+        String model = gson.toJson(test);
+
+        TestResponse res = request( "POST", "/fire/4/0", model);
+        assertEquals( res, null);
+        //assertEquals( "Invalid fire location! That shot was off the board.", res.body);
     }
 
-    private TestResponse request(String method, String path) {
+    @Test
+    public void testValidFire(){
+        BattleshipModel test = new BattleshipModel();
+        Gson gson = new Gson();
+        String model = gson.toJson(test);
+
+        TestResponse res = request( "POST", "/fire/4/1", model);
+        assertEquals( 200, res.status);
+    }
+
+    private TestResponse request(String method, String path, String body) {
         try {
             URL url = new URL("http://localhost:4567" + path);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod(method);
             connection.setDoOutput(true);
+            if(body != null) {
+                connection.setDoInput(true);
+                byte[] outputInBytes = body.getBytes("UTF-8");
+                OutputStream os = connection.getOutputStream();
+                os.write(outputInBytes);
+            }
             connection.connect();
-            String body = IOUtils.toString(connection.getInputStream());
+            body = IOUtils.toString(connection.getInputStream());
             return new TestResponse(connection.getResponseCode(), body);
         } catch (IOException e) {
-            e.printStackTrace();
-            fail("Sending request failed: " + e.getMessage());
             return null;
         }
     }
