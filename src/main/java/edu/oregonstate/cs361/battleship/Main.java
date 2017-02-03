@@ -124,7 +124,10 @@ public class Main {
             //Fire at location and update computer hits and misses
             gameState.PlayerHitsAndMisses(fireLocation);
 
-            //Have AI fire here?
+            Point AIFire = new Point();
+            BattleshipModel method = new BattleshipModel();
+             AIFire = method.AIfirePoint();
+            method.AIHitsAndMisses(AIFire);
 
             //Convert game state back to JSON
             result = gson.toJson(gameState);
