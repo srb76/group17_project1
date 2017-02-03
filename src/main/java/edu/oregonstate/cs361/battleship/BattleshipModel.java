@@ -309,11 +309,6 @@ public class BattleshipModel {
         return result;
 
     }
-    private void fire() {
-        //  userFire();  ->NEEDS IMPLEMENTATION
-        Point point = AIfirePoint();
-        AIHitsAndMisses(point);
-    }
 
 
     public void placeComputerShips(){
@@ -384,6 +379,10 @@ public class BattleshipModel {
 
         }
 
+    }
+
+    public int get_AI_Point_Length(){
+        return AI_Points.size();
     }
 
     private boolean isValidComputerMove(int length, String orientation, int across, int down, boolean isHuman){

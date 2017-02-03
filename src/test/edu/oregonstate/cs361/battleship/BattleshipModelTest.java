@@ -115,4 +115,13 @@ class BattleshipModelTest {
         assertEquals("Hit!",result);
     }
 
+    @Test
+    void testAIPlace () {
+        BattleshipModel test = new BattleshipModel();
+        test.placeComputerShips();
+        assertEquals(16, test.get_AI_Point_Length());
+    }
+
+
+
 }
